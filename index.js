@@ -5,6 +5,10 @@ app.use(express.json());
 app.use(require("cookie-parser")());
 app.use(express.urlencoded({ extended: true }));
 app.use("/auth", require("./auth/auth"));
+app.use("/api/products", require("./api/productRouter"));
+const authorize = require("./middlewares/authorize");
+app.use(authorize)
+app.use("/api/cart/", require("./api/cartRouter"));
 const mongoose = require("mongoose");
 mongoose.set("debug", true);
 mongoose.connect(process.env.MONGODB_URI);

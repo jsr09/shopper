@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const {productOrderSchema} = require("./ProductOrder");
+
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -18,6 +20,15 @@ const userSchema = new mongoose.Schema({
     default: false,
     required: true,
   },
+  cart:{
+    type: [productOrderSchema],
+    required: true,
+   
+  },
+  orders:{
+    type: [mongoose.Schema.Types.ObjectId],
+    
+  }
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = {User: mongoose.model("User", userSchema)}
